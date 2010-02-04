@@ -5,6 +5,12 @@
    parsley_result=`/usr/local/bin/parsley -V`
    if [[ $parsley_result != $parsley_version ]]; then
 
+   # Test if we are root so we can install
+     if [ "`whoami`" != "root" ]; then
+      echo "Must be run as root"
+      exit 1
+     fi
+
    # /etc/config.yml
     if ! test -e /usr/local/include/json/json.h; then
       echo json not found, installing
